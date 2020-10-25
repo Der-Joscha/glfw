@@ -3,8 +3,8 @@ project "GLFW"
 	kind "StaticLib"
 	language "C"
 
-	targetdir ("Binary/" .. outputdir .. "/%{prj.name}")
-	objdir ("Object/" .. outputdir .. "/%{prj.name}")
+	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
@@ -22,7 +22,6 @@ project "GLFW"
 		pic "On"
 
 		systemversion "latest"
-		staticruntime "On"
 
 		files
 		{
@@ -43,10 +42,8 @@ project "GLFW"
 			"_GLFW_X11"
 		}
 
-	filter "system:windows"
-	
+	filter "system:windows"	
 		systemversion "latest"
-		staticruntime "On"
 
 		files
 		{
@@ -68,11 +65,11 @@ project "GLFW"
 		}
 
 	filter "configurations:Debug"
-	
+		optimize "Off"
+		symbols "On"
 		runtime "Debug"
-		symbols "on"
 
 	filter "configurations:Release"
-	
+		optimize "On"
+		symbols "Off"
 		runtime "Release"
-		optimize "on"
